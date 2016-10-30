@@ -126,7 +126,9 @@ $strings = explode(" ", $str);
 //var_dump($strings);
 $i = 0;
 $word = $strings[$i];
-if (isset($word)) $str = $word;
+if (isset($word)) {
+    $str = $word;
+}
 while (isset($word)) {
     $str .= "—" . $word;
     $i++;
