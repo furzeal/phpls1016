@@ -134,21 +134,52 @@ echo '</br></br>';
 echo '<h3>Задание #4</h3>';
 function func4($number1, $number2)
 {
-  if (is_int($number1)&&is_int($number2)){
-      for ($x = 1; $x <= $number1; $x++) {
-          for ($y = 1; $y <= $number2; $y++) {
-              $result = $x * $y;
-                  echo "$result ";
-              }
-          echo "<br/>";
-      }
-  } else{
-      return "Числа не являются целыми";
-  }
+    if (is_int($number1) && is_int($number2)) {
+        for ($x = 1; $x <= $number1; $x++) {
+            for ($y = 1; $y <= $number2; $y++) {
+                $result = $x * $y;
+                echo "$result ";
+            }
+            echo "<br/>";
+        }
+    } else {
+        return "Числа не являются целыми";
+    }
 }
 
 echo func4(10, 15);
 echo '</br></br>';
+
+// Task #5
+echo '<h3>Задание #5</h3>';
+// Define isPalindrome function
+function isPalindrome($word)
+{
+    $str = $word;
+    // Remove white spaces from string
+    $str = str_replace("  ", "", $str);
+    $str = str_replace(" ", "", $str);
+    // Set string to uppercase
+    $str = strtoupper($str);
+    // Compare string with mirror
+    if ($str == strrev($str))
+        return true;
+    else
+        return false;
+}
+// Define func5
+function func5()
+{
+    $word = "  oLo lO  ";
+    if (isPalindrome($word))
+        echo "Строка \"$word\" является палиндромом без учета пробелов и регистра";
+    else
+        echo "Строка \"$word\" не является палиндромом без учета пробелов и регистра";
+}
+
+func5();
+echo '</br></br>';
+
 
 ?>
 
