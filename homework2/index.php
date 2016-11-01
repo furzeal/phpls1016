@@ -167,6 +167,7 @@ function isPalindrome($word)
     else
         return false;
 }
+
 // Define func5
 function func5()
 {
@@ -180,6 +181,28 @@ function func5()
 func5();
 echo '</br></br>';
 
+// Task #6
+echo '<h3>Задание #6</h3>';
+$result = date("d.m.Y H:i");
+echo "$result<br/>";
+$result = mktime(0, 0, 0, 2, 24, 2016);
+echo "$result<br/>";
+
+// Task #7
+echo '<h3>Задание #7</h3>';
+$statement = "Карл у Клары украл Кораллы";
+echo "Исходная строка: $statement<br/>";
+$statement = str_replace("К", "", $statement);
+echo "Результат: $statement<br/>";
+$statement = "Две бутылки лимонада";
+echo "Исходная строка: $statement<br/>";
+$statement = str_replace("Две", "Три", $statement);
+echo "Результат: $statement<br/>";
+echo '</br></br>';
+
+// Task #10
+file_put_contents("anothertest.txt","Hello again!");
+//echo '</br></br>';
 
 ?>
 
