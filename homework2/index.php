@@ -148,7 +148,7 @@ function func4($number1, $number2)
 }
 
 echo func4(10, 15);
-echo '</br></br>';
+echo '</br>';
 
 // Task #5
 echo '<h3>Задание #5</h3>';
@@ -187,6 +187,8 @@ $result = date("d.m.Y H:i");
 echo "$result<br/>";
 $result = mktime(0, 0, 0, 2, 24, 2016);
 echo "$result<br/>";
+echo '</br>';
+
 
 // Task #7
 echo '<h3>Задание #7</h3>';
@@ -198,10 +200,66 @@ $statement = "Две бутылки лимонада";
 echo "Исходная строка: $statement<br/>";
 $statement = str_replace("Две", "Три", $statement);
 echo "Результат: $statement<br/>";
+echo '</br>';
+
+// Task #8
+echo '<h3>Задание #8</h3>';
+// Run function
+PacketsCount("RX packets:950381 errors:0 dropped:0 overruns:0 frame:)0. ");
+// Count packets
+function PacketsCount($string)
+{
+    preg_match("/packets:[0-9]*/", $string, $packetsCount);
+    $packetsCount = preg_replace("/packets:/", "", $packetsCount);
+    if ($packetsCount >= 1000) {
+        $isSmileExist = preg_match("/:\\)/", $string);
+        if ($isSmileExist) {
+            drawSmile();
+        } else {
+            echo "Сеть есть";
+        }
+    } else {
+        echo "Сеть отсутствует";
+    }
+}
+// Smile
+function drawSmile()
+{
+    Echo "<Pre style=\"line-height:.6\">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'               `$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$'                   `$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n
+$$$'`$$$$$$$$$$$$$'`$$$$$$!                       !$$$$$$'`$$$$$$$$$$$$$'`$$$\n
+$$$$  $$$$$$$$$$$  $$$$$$$                         $$$$$$$  $$$$$$$$$$$  $$$$\n
+$$$$. `$' \' \$`  $$$$$$$!                         !$$$$$$$  '$/ `/ `$' .$$$$$\n
+$$$$$. !\  i  i .$$$$$$$$                           $$$$$$$$. i  i  /! .$$$$$\n
+$$$$$$   `--`--.$$$$$$$$$                           $$$$$$$$$.--'--'   $$$$$$\n
+$$$$$\$L        `$$$$$^^$$                           $$^^$$$$$'        J$$$$$$\n
+$$$$$$$.   .'   \"\"~   $$$    $.                 .$  $$$   ~\"\"   `.   .$$$$$$$\n
+$$$$$$$$.  ;      .e$$$$$!    $$.             .$$  !$$$$\$e,      ;  .$$$$$$$$\n
+$$$$$$$$$   `.$$$$$$$$$$$$     $$$.         .$$$   $$$$$$$$$$$$.'   $$$$$$$$$\n
+$$$$$$$$    .$$$$$$$$$$$$$!     $$`$$$$$$$$'$$    !$$$$$$$$$$$$$.    $$$$$$$$\n
+$$$$$$$     $$$$$$$$$$$$$$$$.    $    $$    $   .$$$$$$$$$$$$$$$$     $$$$$$$\n
+                                 $    $$    $\n
+                                 $.   $$   .$\n
+                                 `$        $'\n
+                                  `$$$$$$$$'<Pre>";
+}
+
 echo '</br></br>';
 
+
+// Task #9
+echo '<h3>Задание #9</h3>';
+function func9($filename)
+{
+    return file_get_contents($filename);
+}
+
+echo func9("Test.txt");
+//echo '</br></br>';
+
+
 // Task #10
-file_put_contents("anothertest.txt","Hello again!");
+file_put_contents("anothertest.txt", "Hello again!");
 //echo '</br></br>';
 
 ?>
