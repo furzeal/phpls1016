@@ -19,7 +19,9 @@ function func1($strArr, $isReturnable = false)
 }
 
 $result = func1(["Lorem", "ipsum", "dolor", "sit", "amet."]);
-if (isset($result)) echo $result;
+if (isset($result)) {
+    echo $result;
+}
 echo '</br>';
 
 // Task #2
@@ -28,8 +30,9 @@ function func2($numbers, $action)
 {
     // Check whether array is numeric
     foreach ($numbers as $key => $value) {
-        if (!(is_float($value) || is_int($value)))
+        if (!(is_float($value) || is_int($value))) {
             return "Массив должен содержать только числовые значения!";
+        }
     }
     // Get count of array members
     $count = count($numbers);
@@ -76,7 +79,9 @@ function func3()
 {
     // Check whether function has minimun 2 parameters
     $count = func_num_args();
-    if ($count < 2) return "Функция должна иметь минимум 2 параметра";
+    if ($count < 2) {
+        return "Функция должна иметь минимум 2 параметра";
+    }
     // Get array of numbers
     $numbers[] = func_get_arg(1);
     for ($i = 2; $i < $count; $i++) {
@@ -84,13 +89,15 @@ function func3()
     }
     // Check whether the array is numeric
     foreach ($numbers as $key => $value) {
-        if (!(is_float($value) || is_int($value)))
+        if (!(is_float($value) || is_int($value))) {
             return "Массив должен содержать только числовые значения!";
+        }
     }
     // Get arithmetic sign
     $actionSign = func_get_arg(0);
-    if (!is_string($actionSign))
+    if (!is_string($actionSign)) {
         return "Первый параметр должен быть строкой";
+    }
     // Get count of array members
     $count = count($numbers);
     if ($count == 1) {
@@ -162,20 +169,22 @@ function isPalindrome($word)
     // Set string to uppercase
     $str = strtoupper($str);
     // Compare string with mirror
-    if ($str == strrev($str))
+    if ($str == strrev($str)) {
         return true;
-    else
+    } else {
         return false;
+    }
 }
 
 // Define func5
 function func5()
 {
     $word = "  oLo lO  ";
-    if (isPalindrome($word))
+    if (isPalindrome($word)) {
         echo "Строка \"$word\" является палиндромом без учета пробелов и регистра";
-    else
+    } else {
         echo "Строка \"$word\" не является палиндромом без учета пробелов и регистра";
+    }
 }
 
 func5();
@@ -243,9 +252,7 @@ $$$$$$$     $$$$$$$$$$$$$$$$.    $    $$    $   .$$$$$$$$$$$$$$$$     $$$$$$$\n
                                  `$        $'\n
                                   `$$$$$$$$'<Pre>";
 }
-
 echo '</br></br>';
-
 
 // Task #9
 echo '<h3>Задание #9</h3>';
@@ -257,10 +264,7 @@ function func9($filename)
 echo func9("Test.txt");
 //echo '</br></br>';
 
-
 // Task #10
 file_put_contents("anothertest.txt", "Hello again!");
 //echo '</br></br>';
-
-?>
 
