@@ -56,13 +56,19 @@ function getRandomNumbers($count)
     return $result;
 }
 
-// Open file
+// Open file for writing
 $filename = "task3.cvs";
 $file = fopen($filename, 'w');
 fputcsv($file, $numbers);
 fclose($file);
+
+// Open file for reading
 $file = fopen($filename, 'r');
 $numbers = fgetcsv($file);
+
+// Calc sum of even numbers
+$evensSum = getEvensSum($numbers);
+echo "Сумма четных чисел массива равна $evensSum";
 function getEvensSum($numbers)
 {
     $sum = 0;
@@ -71,7 +77,4 @@ function getEvensSum($numbers)
     }
     return $sum;
 }
-
-$evensSum = getEvensSum($numbers);
-echo "Сумма четных чисел массива равна $evensSum";
 echo "</br></br>";
