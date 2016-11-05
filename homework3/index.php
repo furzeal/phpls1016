@@ -42,6 +42,62 @@ foreach ($xml->Items->Item as $item) {
 }
 echo "</br>";
 
+// Task #2
+echo '<h3>Задание #2</h3>';
+// Create array
+$colors = ['red', 'green', 'blue'];
+$nested = ['paper' => 'A4', 'orientation' => 'Portrait', 'colors' => $colors];
+// Encode array
+$filename1 = 'output.json';
+$filename2 = 'output2.json';
+file_put_contents($filename1, json_encode($nested));
+// Get output.json
+$output = file_get_contents($filename1);
+// Change file if needed
+$output2 = changeJSON($output);
+function changeJSON($output)
+{
+    // Get random number
+    $result = $output;
+    $rand = rand(0, 100);
+    // Change data
+    if ($rand > 50) {
+        $result = str_replace("Portrait", "Album", $output);
+        $result = str_replace("A4", "A3", $result);
+    }
+    return $result;
+}
+
+// Save file
+file_put_contents($filename2, $output2);
+// Show JSON difference
+showDifference($filename1, $filename2);
+function showDifference($filename1, $filename2)
+{
+    // Open files
+    $input = file_get_contents($filename1);
+    $arr1 = (array)json_decode($input);
+    //print_r($arr1);
+    $input = file_get_contents($filename2);
+    $arr2 = (array)json_decode($input);
+    //print_r($arr2);
+    // Compare JSON
+    if ($arr1 === $arr2) {
+        echo "Отличающиеся элементы в $filename1 и $filename2 отсутствуют.";
+    } else {
+        // Compare arrays
+        foreach ($arr1 as $key => $value) {
+            $element1 =$arr1[$key];
+            $element2 =$arr2[$key];
+            if ($element1 !== $element2) {
+                echo "В файлах отличаются значения элемента '", $key,"'<br/>";
+                echo "$filename1: $element1, $filename2: $element2<br/>";
+            }
+        }
+    }
+}
+echo "</br>";
+
 // Task #3
 echo '<h3>Задание #3</h3>';
 // Create array
@@ -77,4 +133,5 @@ function getEvensSum($numbers)
     }
     return $sum;
 }
+
 echo "</br></br>";
