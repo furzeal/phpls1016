@@ -15,15 +15,13 @@ function func1($strArr, $isReturnable = false)
         echo "<p>$value</p>";
     }
     if ($isReturnable) {
-        $wholeString = "";
-        foreach ($strArr as $key => $value) {
-            $wholeString .= $value;
-        }
+        $wholeString = implode($strArr);
         return $wholeString;
     }
 }
 
-$result = func1(["Lorem", "ipsum", "dolor", "sit", "amet."]);
+$arr = ["Lorem", "ipsum", "dolor", "sit", "amet."];
+$result = func1($arr, true);
 if (isset($result)) {
     echo $result;
 }
@@ -91,10 +89,11 @@ echo '</br></br>';
 echo '<h3>Задание #3</h3>';
 function func3()
 {
-    // Check whether function has minimun 2 parameters
+    // Check whether function has 2 parameters minimun
     $count = func_num_args();
+    $errorMsg = "";
     if ($count < 2) {
-        return "Функция должна иметь минимум 2 параметра";
+        $errorMsg = "Функция должна иметь минимум 2 параметра";
     }
     // Get array of numbers
     $numbers[] = func_get_arg(1);
@@ -104,19 +103,22 @@ function func3()
     // Check whether the array is numeric
     foreach ($numbers as $key => $value) {
         if (!(is_float($value) || is_int($value))) {
-            return "Массив должен содержать только числовые значения!";
+            $errorMsg = "Массив должен содержать только числовые значения!";
         }
     }
     // Get arithmetic sign
     $actionSign = func_get_arg(0);
     if (!is_string($actionSign)) {
-        return "Первый параметр должен быть строкой";
+        $errorMsg = "Первый параметр должен быть строкой";
+    }
+    // Check errors
+    if ($errorMsg !== "") {
+        return $errorMsg;
     }
     // Get count of array members
     $count = count($numbers);
-    if ($count == 1) {
-        return $numbers[0];
-    } else {
+    $result = $numbers[0];
+    if ($count !== 1) {
         // Calc expression
         $result = $numbers[0];
         switch ($actionSign) {
@@ -144,8 +146,8 @@ function func3()
                 // return error message
                 return "$actionSign — Неверный знак арифметической операции";
         }
-        return $result;
     }
+    return $result;
 }
 
 echo func3("+", 3, 3);
@@ -188,17 +190,38 @@ function isPalindrome($word)
     // Set string to uppercase
     $str = strtoupper($str);
     // Compare string with mirror
-    if ($str == strrev($str)) {
+    if ($str == utf8_strrev($str)) {
         return true;
     } else {
         return false;
     }
 }
 
+// support function
+function str_to_array($string)
+{
+    $length = mb_strlen($string);
+    $ret = [];
+
+    for ($i = 0; $i < $length; $i += 1) {
+
+        $ret[] = mb_substr($string, $i, 1);
+    }
+
+    return $ret;
+}
+
+// support function
+function utf8_strrev($string)
+{
+    return implode(array_reverse(str_to_array($string)));
+}
+
 // Define func5
 function func5()
 {
-    $word = "  oLo lO  ";
+    //$word = "  oLo lO  ";
+    $word = "ААббАА";
     if (isPalindrome($word)) {
         echo "Строка \"$word\" является палиндромом без учета пробелов и регистра";
     } else {
@@ -237,12 +260,12 @@ echo '<h3>Задание #8</h3>';
 // Не принято.
 // Для значения 981 отображается смайл
 // Run function
-PacketsCount("RX packets:950381 errors:0 dropped:0 overruns:0 frame:)0. ");
+PacketsCount("RX packets:981 errors:0 dropped:0 overruns:0 frame:)0. ");
 // Count packets
 function PacketsCount($string)
 {
     preg_match("/packets:[0-9]*/", $string, $packetsCount);
-    $packetsCount = preg_replace("/packets:/", "", $packetsCount);
+    $packetsCount = (int)preg_replace("/packets:/", "", $packetsCount);
     if ($packetsCount >= 1000) {
         $isSmileExist = preg_match("/:\\)/", $string);
         if ($isSmileExist) {
@@ -254,6 +277,7 @@ function PacketsCount($string)
         echo "Сеть отсутствует";
     }
 }
+
 // Smile
 function drawSmile()
 {
@@ -275,6 +299,7 @@ $$$$$$$     $$$$$$$$$$$$$$$$.    $    $$    $   .$$$$$$$$$$$$$$$$     $$$$$$$\n
                                  `$        $'\n
                                   `$$$$$$$$'<Pre>";
 }
+
 echo '</br></br>';
 
 // Task #9

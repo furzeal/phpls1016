@@ -87,15 +87,16 @@ function showDifference($filename1, $filename2)
     } else {
         // Compare arrays
         foreach ($arr1 as $key => $value) {
-            $element1 =$arr1[$key];
-            $element2 =$arr2[$key];
+            $element1 = $arr1[$key];
+            $element2 = $arr2[$key];
             if ($element1 !== $element2) {
-                echo "В файлах отличаются значения элемента '", $key,"'<br/>";
+                echo "В файлах отличаются значения элемента '", $key, "'<br/>";
                 echo "$filename1: $element1, $filename2: $element2<br/>";
             }
         }
     }
 }
+
 echo "</br>";
 
 // Task #3
@@ -135,3 +136,34 @@ function getEvensSum($numbers)
 }
 
 echo "</br></br>";
+
+// Task #4
+echo '<h3>Задание #4</h3>';
+// initialize session
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_URL, "https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json");
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+$result_json = curl_exec($curl);
+curl_close($curl);
+$result = json_decode($result_json, true);
+//echo '<pre>';
+//var_dump($result);
+//echo '</pre>';
+//echo($result->query);
+// Get title value
+echo "title is \"",getValueByKey($result, 'title'),"\"<br/>";
+// Get pageid value
+echo "pageid is \"",getValueByKey($result, 'pageid'),"\"<br/>";
+// Search key
+function getValueByKey($input, $key)
+{
+    foreach ($input as $currentKey => $value) {
+        if ($currentKey === $key) {
+            return $value;
+        }
+        if (is_array($value)) {
+            return getValueByKey($value, $key);
+        }
+    }
+    return null;
+}
