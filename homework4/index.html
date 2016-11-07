@@ -8,7 +8,7 @@
     <title>Homework#4</title>
 </head>
 <body>
-<h2>Авторизация</h2>
+<h3>Авторизация</h3>
 <form action="php/check_registration.php" method="post">
     <div>
         <label for="login">Логин</label>
@@ -16,11 +16,11 @@
     </div>
     <div>
         <label for="password">Пароль</label>
-        <input type="text" name="password" id="price">
+        <input type="password" name="password" id="password">
     </div>
     <div>
-        <input type="submit" value="Добавить продукт">
-        <input type="button" value="Отменить" onClick="window.location.href='catalog-items.php?category=<?=$category?>';">
+        <input type="button" value="Зарегистрироваться" onClick="window.location.href='php/registration.php';">
+        <input type="submit" value="Войти">
     </div>
 </form>
 </body>
