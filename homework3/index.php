@@ -1,8 +1,10 @@
 <?php
 // Header
+// Принято полностью
 echo '<h2>PHP course loftschool. Домашнее задание #3. Максим Шаталов</h2><br/>';
 
 // Task #1
+// Принято
 echo '<h3>Задание #1</h3>';
 // Read xml
 $xml = simplexml_load_file('data.xml');
@@ -43,6 +45,8 @@ foreach ($xml->Items->Item as $item) {
 echo "</br>";
 
 // Task #2
+// Принято
+
 echo '<h3>Задание #2</h3>';
 // Create array
 $colors = ['red', 'green', 'blue'];
@@ -100,12 +104,18 @@ function showDifference($filename1, $filename2)
 echo "</br>";
 
 // Task #3
+// Принято
 echo '<h3>Задание #3</h3>';
 // Create array
 $count = rand(50, 60);
 $numbers = getRandomNumbers($count);
 function getRandomNumbers($count)
 {
+    // Зачем так? Проще:
+    // for ($i = 0; $i < $count-1; $i++) {
+    // Если так сделать, не придется создавать 0 элемент
+    // Если эе 0 элемент задан для инциализации массива, нагляднее и удобнее переменную инициализировать пустым массивом
+    // $result = array();
     $result[0] = rand(1, 100);
     for ($i = 1; $i < $count; $i++) {
         $result[] = rand(1, 100);
@@ -138,6 +148,7 @@ function getEvensSum($numbers)
 echo "</br></br>";
 
 // Task #4
+// Принято
 echo '<h3>Задание #4</h3>';
 // initialize session
 $curl = curl_init();
