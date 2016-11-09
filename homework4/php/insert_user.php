@@ -1,13 +1,11 @@
 <?php
 require_once 'connect.php';
 try {
-    echo $_POST;
     $name = htmlentities(strip_tags(trim($_POST['name'])), ENT_QUOTES);
     $age = (int)($_POST['age']);
     $description = htmlentities(strip_tags(trim($_POST['description'])), ENT_QUOTES);
     $login = htmlentities(strip_tags(trim($_POST['login'])), ENT_QUOTES);
     $password = htmlentities(strip_tags(trim($_POST['password'])), ENT_QUOTES);
-    echo $name,$age,$description,$login,$password;
     $sql = "INSERT INTO users(name, age, description, login, password)
                     VALUES (?, ?, ?, ?, ?)";
     $STH = $DBH->prepare($sql);
