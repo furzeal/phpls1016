@@ -10,7 +10,7 @@ try {
     $STH = $DBH->prepare($sql);
     $STH->execute([':login' => $login]);
     $row = $STH->fetch();
-    $loginDB = ($row['login']);
+    $loginDB = $row['login'];
     $passwordDB = ($row['password']);
     if (($login === $loginDB) && ($password === $passwordDB)) {
         header('HTTP/1.1 307 Temporary Redirect');

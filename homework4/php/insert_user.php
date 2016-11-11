@@ -1,6 +1,9 @@
 <?php
 require_once 'connect.php';
 try {
+    // Check files
+    echo $uploadedFile = $_FILES['photo']['name'];
+
     $name = htmlentities(strip_tags(trim($_POST['name'])), ENT_QUOTES);
     $age = (int)($_POST['age']);
     $description = htmlentities(strip_tags(trim($_POST['description'])), ENT_QUOTES);
