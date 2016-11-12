@@ -16,28 +16,34 @@ if (isset($_POST['login'])) {
         $_SESSION['login'] = $row['login'];
         // Check file
         $file = $_FILES['photo'];
-        var_dump ($file);
-        if ($file){
+        if ($file) {
             if (preg_match('/jpg/', $file['name'])
                 or preg_match('/png/', $file['name'])
                 or preg_match('/gif/', $file['name'])
             ) {
+
                 if (preg_match('/jpg/', $file['type'])
                     or preg_match('/png/', $file['type'])
                     or preg_match('/gif/', $file['type'])
                 ) {
-                    // Вот тут у меня затуп - не пойму как абсолютную ссылку указать
-                    move_uploaded_file($file['tmp_name'],'/homework4/photos/'.$file['name']);
+                    // $_FILES['photo'] = move_uploaded_file($file['tmp_name'],'../photos/'.$file['name']);
+                    session_write_close();
+                    header('HTTP/1.1 307 Temporary Redirect');
+                    header('Location: insert_user.php', true, 302);
+                } else {
+                    $_SESSION['msg'] = 'Файл не является картинкой';
+                    session_write_close();
                 }
-
+            } else {
+                //echo "Файл не является картинкой";
+                $_SESSION['msg'] = 'Файл не является картинкой';
+                session_write_close();
             }
         }
     }
-
-    session_write_close();
-    header('Location: ' . $_SERVER['SCRIPT_NAME'], true, 302);
 } else {
-    $age = $_SESSION['login'];
+    $login = $_SESSION['login'];
+    $msg = $_SESSION['msg'];
 }
 ?>
 <html lang="ru">
@@ -51,6 +57,7 @@ if (isset($_POST['login'])) {
 <body>
 <h3>Регистрация</h3>
 <form enctype="multipart/form-data" method="post">
+    <?php var_dump($msg) ?>
     <div>
         <label for="name">Имя</label>
         <div><input required type="text" name="name" id="name"></div>
