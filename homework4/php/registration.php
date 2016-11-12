@@ -2,7 +2,7 @@
 require_once 'connect.php';
 session_start();
 if (isset($_POST['login'])) {
-    // Get login from base
+// Get login from base
     $login = htmlentities(strip_tags(trim($_POST['login'])), ENT_QUOTES);
     $sql = "SELECT login, password
             FROM users
@@ -11,10 +11,11 @@ if (isset($_POST['login'])) {
     $STH->execute([':login' => $login]);
     $row = $STH->fetch();
     if ($row) {
+        //echo "Такой пользователь уже существует";
         $_SESSION['msg'] = 'Такой пользователь уже существует';
     } else {
         $_SESSION['login'] = $row['login'];
-        // Check file
+// Check file
         $file = $_FILES['photo'];
         if ($file) {
             if (preg_match('/jpg/', $file['name'])
@@ -35,15 +36,16 @@ if (isset($_POST['login'])) {
                     session_write_close();
                 }
             } else {
-                //echo "Файл не является картинкой";
+                echo "Файл не является картинкой";
+                // Когда загружаешь файл другого типа - var_dump($msg) все равно показывает NULL
                 $_SESSION['msg'] = 'Файл не является картинкой';
                 session_write_close();
             }
+        } else {
+            $login = $_SESSION['login'];
+            $msg = $_SESSION['msg'];
         }
     }
-} else {
-    $login = $_SESSION['login'];
-    $msg = $_SESSION['msg'];
 }
 ?>
 <html lang="ru">
