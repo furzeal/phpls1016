@@ -265,7 +265,8 @@ PacketsCount("RX packets:981 errors:0 dropped:0 overruns:0 frame:)0. ");
 function PacketsCount($string)
 {
     preg_match("/packets:[0-9]*/", $string, $packetsCount);
-    $packetsCount = (int)preg_replace("/packets:/", "", $packetsCount);
+    $packetsCount = preg_replace("/packets:/", "", $packetsCount);
+    $packetsCount=(int)$packetsCount[0];
     if ($packetsCount >= 1000) {
         $isSmileExist = preg_match("/:\\)/", $string);
         if ($isSmileExist) {
