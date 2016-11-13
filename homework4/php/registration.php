@@ -11,13 +11,17 @@ if (isset($_POST['login'])) {
     $STH->execute([':login' => $login]);
     $row = $STH->fetch();
     if ($row) {
-        //echo "Такой пользователь уже существует";
+        echo "Такой пользователь уже существует";
         $_SESSION['msg'] = 'Такой пользователь уже существует';
+        session_write_close();
     } else {
         $_SESSION['login'] = $row['login'];
 // Check file
-        $file = $_FILES['photo'];
-        if ($file) {
+        $file = empty($_FILES['photo']) ? null : $_FILES['photo'];
+        //echo '{$file:}';
+        //var_dump($file['error']);
+        //echo "</br>";
+        if ($file['error'] === UPLOAD_ERR_OK) {
             if (preg_match('/jpg/', $file['name'])
                 or preg_match('/png/', $file['name'])
                 or preg_match('/gif/', $file['name'])
@@ -28,10 +32,11 @@ if (isset($_POST['login'])) {
                     or preg_match('/gif/', $file['type'])
                 ) {
                     // $_FILES['photo'] = move_uploaded_file($file['tmp_name'],'../photos/'.$file['name']);
-                    session_write_close();
-                    header('HTTP/1.1 307 Temporary Redirect');
-                    header('Location: insert_user.php', true, 302);
+                    //session_write_close();
+                    // Insert user
+                    insertUser($DBH, true, $file);
                 } else {
+                    echo "Файл не является картинкой";
                     $_SESSION['msg'] = 'Файл не является картинкой';
                     session_write_close();
                 }
@@ -42,11 +47,55 @@ if (isset($_POST['login'])) {
                 session_write_close();
             }
         } else {
-            $login = $_SESSION['login'];
-            $msg = $_SESSION['msg'];
+            insertUser($DBH);
         }
     }
+} else {
+    $login = $_SESSION['login'];
+    $msg = $_SESSION['msg'];
 }
+
+function insertUser($DBH, $withFile = false, $file = null)
+{
+    try {
+        $name = htmlentities(strip_tags(trim($_POST['name'])), ENT_QUOTES);
+        $age = (int)($_POST['age']);
+        $description = htmlentities(strip_tags(trim($_POST['description'])), ENT_QUOTES);
+        $login = htmlentities(strip_tags(trim($_POST['login'])), ENT_QUOTES);
+        $password = htmlentities(strip_tags(trim($_POST['password'])), ENT_QUOTES);
+        if ($withFile) {
+            $filename = makeFilename($login, $file);
+            // Move file
+            $_FILES['photo'] = move_uploaded_file($file['tmp_name'], '../photos/' . $filename);
+            $sql = "INSERT INTO users(name, age, description, login, password, filename)
+                    VALUES (?, ?, ?, ?, ?, ?)";
+            $STH = $DBH->prepare($sql);
+            $data = [$name, $age, $description, $login, $password, $filename];
+        } else {
+            $sql = "INSERT INTO users(name, age, description, login, password)
+                    VALUES (?, ?, ?, ?, ?)";
+            $STH = $DBH->prepare($sql);
+            $data = [$name, $age, $description, $login, $password];
+
+        }
+        //var_dump($data);
+        $STH->execute($data);
+        header('HTTP/1.1 307 Temporary Redirect');
+        header('Location: homepage.php');
+        exit;
+
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function makeFilename($login, $file)
+{
+    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $result = $login . "_avatar.$ext";
+    return $result;
+}
+
 ?>
 <html lang="ru">
 <head>
@@ -59,7 +108,11 @@ if (isset($_POST['login'])) {
 <body>
 <h3>Регистрация</h3>
 <form enctype="multipart/form-data" method="post">
-    <?php var_dump($msg) ?>
+    <?php
+    //echo '{$msg:}';
+    //var_dump($msg);
+    //echo "</br>";
+    ?>
     <div>
         <label for="name">Имя</label>
         <div><input required type="text" name="name" id="name"></div>

@@ -1,9 +1,6 @@
 <?php
 require_once 'connect.php';
 try {
-    // Check files
-    echo $uploadedFile = $_FILES['photo']['name'];
-
     $name = htmlentities(strip_tags(trim($_POST['name'])), ENT_QUOTES);
     $age = (int)($_POST['age']);
     $description = htmlentities(strip_tags(trim($_POST['description'])), ENT_QUOTES);
@@ -16,9 +13,9 @@ try {
     //var_dump($data);
     $STH->execute($data);
 
-    header('HTTP/1.1 307 Temporary Redirect');
-    header('Location: homepage.php');
-    exit;
+    //header('HTTP/1.1 307 Temporary Redirect');
+    //header('Location: homepage.php');
+    //exit;
 
 } catch (PDOException $e) {
     echo $e->getMessage();

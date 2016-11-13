@@ -23,6 +23,7 @@ try {
 //      description VARCHAR(255),
 //      login VARCHAR(20) NOT NULL UNIQUE,
 //      password VARCHAR(20) NOT NULL,
+//      filename VARCHAR(255) NULL,
 //      PRIMARY KEY (id)
 //    ) ENGINE = InnoDB DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1;";
 //    $DBH->prepare($sql)->execute();
