@@ -8,7 +8,10 @@ if (isset($_POST['newname'])) {
     $oldname = htmlentities(strip_tags(trim($_POST['oldname'])), ENT_QUOTES);
     $oldpath = '../photos/' . $oldname;
     $ext = strtolower(pathinfo($oldpath, PATHINFO_EXTENSION));
-    $newname .= ".$ext";
+    $pattern = "/.$ext/";
+    if (!preg_match($pattern, $newname)) {
+        $newname .= ".$ext";
+    }
     $newpath = '../photos/' . $newname;
     //echo $oldname, $newname;
     if (rename($oldpath, $newpath)) {
@@ -31,7 +34,7 @@ if (isset($_POST['newname'])) {
 <form method='post'> <!--action="homepage.php" >-->
     <div>
         <label for="newname">Введите новое имя файла</label>
-        <div><input type="text" name="newname" id="newname"></div>
+        <div><input type="text" name="newname" id="newname" value="<?php echo $_GET['name']; ?>"></div>
     </div>
     <div>
         <div><input type="hidden" name="oldname" id="oldname"
