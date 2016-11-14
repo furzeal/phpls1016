@@ -1,4 +1,8 @@
 <?php
+if (isset($_GET['getsess'])) {
+    session_start();
+    exit('<pre>' . print_r($_SESSION,1));
+}
 require_once 'connect.php';
 session_start();
 if (isset($_POST['login'])) {
@@ -21,6 +25,9 @@ if (isset($_POST['login'])) {
         //echo '{$file:}';
         //var_dump($file['error']);
         //echo "</br>";
+
+        // Бесполезные 2 IF, которые плодят однотипные конструкции else.
+        // Правильнее объединить группы условий в одном IF
         if ($file['error'] === UPLOAD_ERR_OK) {
             if (preg_match('/jpg/', $file['name'])
                 or preg_match('/png/', $file['name'])
@@ -122,7 +129,7 @@ function makeFilename($login, $file)
         <div><input required type="number" name="age" id="age"></div>
     </div>
     <div>
-        <label for="description">О себе</label>
+        <label for="reg_ta">О себе</label>
         <div>
             <textarea name="description" id="reg_ta" cols="30" rows="10"></textarea>
         </div>
