@@ -1,10 +1,10 @@
 <?php
 try {
-    $host = '/tmp/mysql.sock';
-    $dbname = 'loftschool';
+    $host = 'localhost';
+    $dbname = 'phpls1016';
     $user = 'root';
-    $pass = 'password';
-    $DBH = new PDO("mysql:unix_socket=$host;dbname=$dbname",
+    $pass = '9Hu5SZdOmYg2SXGc';
+    $DBH = new PDO("mysql:host=$host;dbname=$dbname",
         $user, $pass);
     $sql = "SET NAMES 'UTF-8";
     $DBH->query($sql);
@@ -23,6 +23,7 @@ try {
 //      description VARCHAR(255),
 //      login VARCHAR(20) NOT NULL UNIQUE,
 //      password VARCHAR(20) NOT NULL,
+//      filename VARCHAR(255) NULL,
 //      PRIMARY KEY (id)
 //    ) ENGINE = InnoDB DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1;";
 //    $DBH->prepare($sql)->execute();
