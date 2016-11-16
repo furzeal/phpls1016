@@ -258,7 +258,6 @@ echo '</br>';
 // Task #8
 echo '<h3>Задание #8</h3>';
 // Принято
-// Для значения 9801 отображается сообщение "Сеть отсутствует"
 // Run function
 PacketsCount("RX packets:981 errors:0 dropped:0 overruns:0 frame:)0. ");
 // Count packets
