@@ -6,8 +6,9 @@ Class Home extends Controller
     {
         Session::init();
         $logged = Session::get('loggedIn');
+        var_dump($logged);
         if ($logged == false) {
-            Session::destroy();
+            //Session::destroy();
             header('Location:' . App::$host . 'mvc/public/login');
             exit();
         }

@@ -19,11 +19,12 @@ class Model_Login extends Model
             $row = $STH->fetch();
             $loginDB = $row['login'];
             $passwordDB = ($row['password']);
+            Session::init();
             if (($login === $loginDB) && ($password === $passwordDB)) {
-                Session::init();
                 Session::set('LoggedIn', true);
                 return true;
             } else {
+                Session::set('LoggedIn', false);
                 return false;
             }
         } catch (PDOException $e) {
