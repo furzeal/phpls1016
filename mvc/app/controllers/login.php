@@ -15,7 +15,7 @@ class Login extends Controller
                     header('Location:' . App::$host . 'mvc/public/home');
                     exit();
                 }else{
-                    //echo 0;
+                    echo "Неверный логин и пароль";
                 }
             }
         $this->view('login/index');

@@ -11,20 +11,22 @@ class Model_Login extends Model
     public function check($login, $password)
     {
         try {
-            $sql = "SELECT login, password
+            $sql = "SELECT id, login, password
                         FROM users
                         WHERE login = :login";
             $STH = parent::$DBH->prepare($sql);
             $STH->execute([':login' => $login]);
             $row = $STH->fetch();
+            $id= $row['id'];
             $loginDB = $row['login'];
             $passwordDB = ($row['password']);
             Session::init();
             if (($login === $loginDB) && ($password === $passwordDB)) {
-                Session::set('LoggedIn', true);
+                Session::set('loggedIn', true);
+                Session::set('id', $id);
                 return true;
             } else {
-                Session::set('LoggedIn', false);
+                Session::set('loggedIn', false);
                 return false;
             }
         } catch (PDOException $e) {

@@ -20,7 +20,7 @@ if (isset($_POST['login'])) {
         session_write_close();
     } else {
         $_SESSION['login'] = $row['login'];
-// Check file
+        // Check file
         $file = empty($_FILES['photo']) ? null : $_FILES['photo'];
         //echo '{$file:}';
         //var_dump($file['error']);

@@ -17,6 +17,6 @@
         <div>
             <input type="submit" value="Войти">
         </div>
-<!--        <input type="button" value="Зарегистрироваться" onClick="window.location.href='php/registration.php';">-->
+        <input type="button" value="Зарегистрироваться" onClick="window.location.href='registration'">
     </div>
 </form>

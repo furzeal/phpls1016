@@ -1,10 +1,5 @@
 <h3>Регистрация</h3>
-<form action="registration/check" method="post">
-    <?php
-    //echo '{$msg:}';
-    //var_dump($msg);
-    //echo "</br>";
-    ?>
+<form enctype="multipart/form-data" action="registration" method="post">
     <div>
         <label for="name">Имя</label>
         <div><input required type="text" name="name" id="name"></div>
@@ -37,7 +32,7 @@
     </div>
     <div>
         <input type="submit" value="Зарегистрироваться">
-        <div><input type="button" value="Отмена" onClick="window.location.href='../index.html';"></div>
+        <div><input type="button" value="Отмена" onClick="window.location.href='home';"></div>
     </div>
 
 </form>

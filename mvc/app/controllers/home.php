@@ -6,7 +6,7 @@ Class Home extends Controller
     {
         Session::init();
         $logged = Session::get('loggedIn');
-        var_dump($logged);
+        //var_dump($logged);
         if ($logged == false) {
             //Session::destroy();
             header('Location:' . App::$host . 'mvc/public/login');
@@ -17,8 +17,19 @@ Class Home extends Controller
 
     public function index()
     {
-        $this->view('header');
-        $this->view('home/index');
+        $id = Session::get('id');
+        $currentUser = $this->model('user');
+        $currentUser->getData($id);
+        $this->view('header_logged');
+        $ids = $this->model('users')->getUsers();
+        foreach ($ids as $userID) {
+            $id = $userID['id'];
+            $user = $this->model('user');
+            $user->getData($id);
+            $users[] = $user;
+        }
+        usort($users, array($this, "cmp_obj"));
+        $this->view('home/index', ['user' => $currentUser, 'users' => $users]);
     }
 
     public function logout()
@@ -26,5 +37,15 @@ Class Home extends Controller
         Session::destroy();
         header('Location:' . App::$host . 'mvc/public/login');
         exit();
+    }
+
+    private static function cmp_obj($a, $b)
+    {
+        $al = $a->age;
+        $bl = $b->age;
+        if ($al == $bl) {
+            return 0;
+        }
+        return ($al > $bl) ? +1 : -1;
     }
 }
