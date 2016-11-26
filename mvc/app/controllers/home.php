@@ -20,7 +20,7 @@ Class Home extends Controller
         $id = Session::get('id');
         $currentUser = $this->model('user');
         $currentUser->getData($id);
-        $this->view('header_logged');
+        //$this->view('header_logged');
         $ids = $this->model('users')->getUsers();
         foreach ($ids as $userID) {
             $id = $userID['id'];
@@ -29,7 +29,9 @@ Class Home extends Controller
             $users[] = $user;
         }
         usort($users, array($this, "cmp_obj"));
-        $this->view('home/index', ['user' => $currentUser, 'users' => $users]);
+//        $this->view('home', ['user' => $currentUser, 'users' => $users]);
+        $this->view('home');
+
     }
 
     public function logout()

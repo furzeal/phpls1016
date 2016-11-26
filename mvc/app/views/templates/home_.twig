@@ -1,0 +1,45 @@
+{#{% include 'header_logged.twig' %}#}
+
+{#<div>#}
+    {#<img src="../photos/{{ data['user']->avatar }}" alt=""#}
+         {#style="min-width: 200px; height: 200px">#}
+{#</div>#}
+
+{#<div>#}
+    {#Имя: {{ data['user']->name }}#}
+{#</div>#}
+{#<div>#}
+    {#Возраст: {{ data['user']->age }}#}
+{#</div>#}
+{#<div>#}
+    {#Описание: {{ data['user']->description }}#}
+{#</div>#}
+
+{#<div>#}
+    {#Список загруженных файлов:#}
+    {#<ul>#}
+        {#{% if data['user']->photos is defined %}#}
+            {#{% for photo in data['user']->photos %}#}
+                {#<div>{{ photo['filename'] }}</div>#}
+            {#{% endfor %}#}
+        {#{% endif %}#}
+    {#</ul>#}
+{#</div>#}
+
+{#<div>#}
+    {#Список пользователей:#}
+    {#<table>#}
+        {#<tr>#}
+            {#<th>Имя</th>#}
+            {#<th>Возраст</th>#}
+            {#<th>Совершеннолетие</th>#}
+        {#</tr>#}
+        {#{% for user in data['users'] %}#}
+            {#<tr>#}
+                {#<td>{{ user->name }}</td>#}
+                {#<td>{{ user->age }}</td>#}
+                {#<td>{{ user->ageType }}</td>#}
+            {#</tr>#}
+        {#{% endfor %}#}
+    {#</table>#}
+{#</div>#}

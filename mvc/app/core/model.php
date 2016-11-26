@@ -37,6 +37,7 @@ class Model
       description VARCHAR(255),
       login VARCHAR(20) NOT NULL UNIQUE,
       password VARCHAR(20) NOT NULL,
+      email VARCHAR(100) NOT NULL,
       PRIMARY KEY (id)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1;";
             self::$DBH->prepare($sql)->execute();

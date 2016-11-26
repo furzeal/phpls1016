@@ -18,6 +18,6 @@ class Login extends Controller
                     echo "Неверный логин и пароль";
                 }
             }
-        $this->view('login/index');
+        $this->view('login');
     }
 }

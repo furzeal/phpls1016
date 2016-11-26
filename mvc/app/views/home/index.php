@@ -15,9 +15,11 @@
 <div>
     Список загруженных файлов:
     <ul>
-        <?php foreach ($data['user']->photos as $photo): ?>
+        <?php
+        if (isset($data['user']->photos)){
+        foreach ($data['user']->photos as $photo): ?>
             <div><?= $photo['filename'] ?></div>
-        <?php endforeach; ?>
+        <?php endforeach; }?>
     </ul>
 </div>
 

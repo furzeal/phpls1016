@@ -47,8 +47,8 @@ class Model_Registration extends Model
     public function insertUser($data)
     {
         try {
-            $sql = "INSERT INTO users(name, age, description, login, password)
-                    VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO users(name, age, description, login, password, email)
+                    VALUES (?, ?, ?, ?, ?,?)";
             $STH = self::$DBH->prepare($sql);
             $pureData = self::getPureData($data);
             $STH->execute($pureData);
