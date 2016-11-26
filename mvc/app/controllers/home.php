@@ -4,9 +4,9 @@ Class Home extends Controller
 {
     public function __construct()
     {
+        parent::__construct();
         Session::init();
         $logged = Session::get('loggedIn');
-        //var_dump($logged);
         if ($logged == false) {
             //Session::destroy();
             header('Location:' . App::$host . 'mvc/public/login');
@@ -29,8 +29,8 @@ Class Home extends Controller
             $users[] = $user;
         }
         usort($users, array($this, "cmp_obj"));
-//        $this->view('home', ['user' => $currentUser, 'users' => $users]);
-        $this->view('home');
+        $this->view('home', ['user' => $currentUser, 'users' => $users]);
+        //$this->view('home');
 
     }
 

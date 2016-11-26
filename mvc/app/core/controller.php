@@ -24,8 +24,8 @@ class Controller
     {
         //require_once '../app/views/' . $view . '.php';
         $view = $view.'.twig';
-        echo "<pre>";
-        var_dump($view);
+//        echo "<pre>";
+//        var_dump($view);
         echo $this->twig->render($view, $data);
     }
 }
