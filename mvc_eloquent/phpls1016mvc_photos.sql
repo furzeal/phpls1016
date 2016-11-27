@@ -1,0 +1,13 @@
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('10_avatar.jpg', 10);
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('11_avatar.jpg', 11);
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('13_avatar.jpg', 13);
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('14_avatar.jpg', 14);
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('15_avatar.jpg', 15);
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('16_avatar.jpg', 16);
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('17_avatar.jpg', 17);
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('18_avatar.jpg', 18);
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('19_avatar.jpg', 19);
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('20_avatar.jpg', 20);
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('21_avatar.jpg', 21);
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('16_avatar.jpg', 21);
+INSERT INTO phpls1016mvc.photos (filename, id_user) VALUES ('15_avatar.jpg', 21);
