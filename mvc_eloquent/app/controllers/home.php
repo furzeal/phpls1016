@@ -12,7 +12,6 @@ Class Home extends Controller
             header('Location:' . App::$host . 'login');
             exit();
         }
-
     }
 
     public function index()

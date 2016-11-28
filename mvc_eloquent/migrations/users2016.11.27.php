@@ -14,5 +14,6 @@ $capsule->schema()->create('users', function ($table) {
     $table->string('login')->unique();
     $table->string('password');
     $table->string('email');
+    $table->integer('ip');
     $table->timestamps();
 });

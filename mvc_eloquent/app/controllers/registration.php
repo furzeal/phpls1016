@@ -1,12 +1,16 @@
 <?php
 
+// import the Intervention Image Manager Class
+use Intervention\Image\ImageManagerStatic as Image;
+
 class Registration extends Controller
 {
     public function index()
     {
-        if ($this->recaptchaCheck()) {
-            // Get data
-            $data = $this->getData();
+        // Get data
+        $data = $this->getData();
+        //if ($this->recaptchaCheck()) {
+        if (empty($this->validate($data))) {
             // Check data in model
             if (isset($_POST['login'])) {
                 // Check user
@@ -19,9 +23,13 @@ class Registration extends Controller
                 }
             }
         } else {
-            echo "Вы точно не робот?";
+            $data['errors'] = $this->validate($data);
         }
-        $this->view('registration');
+
+//        } else {
+//            echo "Вы точно не робот?";
+//        }
+        $this->view('registration',$data);
     }
 
     private function recaptchaCheck()
@@ -45,12 +53,28 @@ class Registration extends Controller
         $login = htmlentities(strip_tags(trim($_POST['login'])), ENT_QUOTES);
         $password = htmlentities(strip_tags(trim($_POST['password'])), ENT_QUOTES);
         $email = htmlentities(strip_tags(trim($_POST['email'])), ENT_QUOTES);
+        $ip = $_SERVER['REMOTE_ADDR'];
         return ['name' => $name,
             'age' => $age,
             'description' => $description,
             'login' => $login,
             'password' => $password,
-            'email' => $email];
+            'email' => $email,
+            'ip' => $ip
+        ];
+    }
+
+    private function validate($data)
+    {
+        $v = new Valitron\Validator($data);
+        $v->rule('LengthMin', 'name', 5);
+        $v->rule('LengthMin', 'description', 50);
+        $v->rule('numeric', 'age');
+        $v->rule('min', 'age', 10);
+        $v->rule('max', 'age', 100);
+        $v->rule('ip', 'ip');
+        $v->validate();
+        return $v->errors();
     }
 
     public function checkUser($login)
@@ -101,6 +125,7 @@ class Registration extends Controller
             $user->login = $data['login'];
             $user->password = $data['password'];
             $user->email = $data['email'];
+            $user->ip = ip2long($data['ip']);
             $user->save();
             $id = $user->id;
             // Return id of user
@@ -118,7 +143,11 @@ class Registration extends Controller
     {
         try {
             $filename = self::makeFilename($id, $file);
-            move_uploaded_file($file['tmp_name'], App::$baseDir . '/photos/' . $filename);
+            $filepath = App::$baseDir . '/photos/' . $filename;
+            move_uploaded_file($file['tmp_name'], $filepath);
+            Image::make($filepath)
+                ->fit(480)
+                ->save($filepath);
             $photo = new Models\Photo();
             $photo->filename = $filename;
             $photo->id_user = $id;
