@@ -13,6 +13,7 @@ class Router
     {
         // Parse url
         $url = $this->parseUrl();
+//        exit(print_r($url, 1));
         if (isset($url)) {
             if (file_exists(App::$baseDir . '/app/controllers/' . $url[0] . '.php')) {
                 // Define controller

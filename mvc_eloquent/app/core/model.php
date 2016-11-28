@@ -15,8 +15,8 @@ class Model
             $host = 'localhost';
             $dbname = 'phpls1016mvc';
             $user = 'root';
-            $pass = '9Hu5SZdOmYg2SXGc';
-            self::$DBH = new PDO("mysql:host=$host;dbname=$dbname",
+            $pass = 'password';
+            self::$DBH = new PDO("mysql:unix_socket=$host;dbname=$dbname",
                 $user, $pass);
             $sql = "SET NAMES 'UTF-8";
             self::$DBH->query($sql);
