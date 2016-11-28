@@ -1,10 +1,9 @@
 {% include 'header_logged.twig' %}
 
 <div>
-    <img src="../photos/{{ user.avatar }}" alt=""
+    <img src="../photos/{{ photos[0] }}" alt=""
          style="min-width: 200px; height: 200px">
 </div>
-
 <div>
     Имя: {{ user.name }}
 </div>
@@ -18,8 +17,8 @@
 <div>
     Список загруженных файлов:
     <ul>
-        {% if user.photos is defined %}
-            {% for photo in user.photos %}
+        {% if photos is defined %}
+            {% for photo in photos %}
                 <div>{{ photo.filename }}</div>
             {% endfor %}
         {% endif %}
@@ -38,7 +37,7 @@
             <tr>
                 <td>{{ user.name }}</td>
                 <td>{{ user.age }}</td>
-                <td>{{ user.ageType }}</td>
+                <td>{{ ageTypes[loop.index0]}}</td>
             </tr>
         {% endfor %}
     </table>

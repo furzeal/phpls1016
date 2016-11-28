@@ -1,4 +1,3 @@
-
 <?php
 
 class Controller
@@ -23,8 +22,10 @@ class Controller
     {
         //require_once '../app/views/' . $view . '.php';
         $view = $view . '.twig';
-//        echo "<pre>";
-//        var_dump($view);
         echo $this->twig->render($view, $data);
+    }
+    protected function clear($data)
+    {
+        return htmlentities(strip_tags(trim($data)), ENT_QUOTES);
     }
 }

@@ -1,7 +1,12 @@
 <?php
-require_once "../app/init.php";
+// Show errors
+ini_set('display_errors', 1);
 
-Connection::capsule::schema()->create('users', function ($table) {
+require_once dirname(__DIR__) . "/app/init.php";
+
+$capsule = App::getCapsule();
+
+$capsule->schema()->create('users', function ($table) {
     $table->increments('id')->unsigned();
     $table->string('name');
     $table->integer('age');

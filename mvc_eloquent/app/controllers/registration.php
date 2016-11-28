@@ -1,6 +1,5 @@
 <?php
 
-
 class Registration extends Controller
 {
     public function index()
@@ -8,41 +7,34 @@ class Registration extends Controller
         if ($this->recaptchaCheck()) {
             // Get data
             $data = $this->getData();
-            $file = empty($_FILES['photo']) ? null : $_FILES['photo'];
             // Check data in model
             if (isset($_POST['login'])) {
-                $model = $this->model('model_registration');
                 // Check user
-                if ($model->checkUser($data['login'])) {
+                if ($this->checkUser($data['login'])) {
                     // Check file
-                    if ($file['error'] === UPLOAD_ERR_OK) {
-                        if ($model->checkFile($file)) {
-                            $id = $model->insertUser($data);
-                            $model->insertFile($id, $file);
-                            // Send email
-                            $mailer = new Mailer();
-                            $mailer->sendMail($data['email'], $data['name']);
-                            header('Location: home');
-                            exit();
-                        } else {
-                            echo "Файл не является картинкой";
-                        }
-                    } else {
-                        $model->insertUser($data);
-                        // Send email
-                        $mailer = new Mailer();
-                        $mailer->sendMail($data['email'], $data['name']);
-                        header('Location: home');
-                        exit();
-                    }
+                    $file = empty($_FILES['photo']) ? null : $_FILES['photo'];
+                    $this->checkFile($file, $data);
                 } else {
                     echo "Такой пользователь уже существует";
                 }
             }
         } else {
-          echo "Вы точно не робот?";
+            echo "Вы точно не робот?";
         }
         $this->view('registration');
+    }
+
+    private function recaptchaCheck()
+    {
+        $remoteIp = $_SERVER['REMOTE_ADDR'];
+        $gRecaptchaResponse = $_POST['g-recaptcha-response'];
+        $recaptcha = new \ReCaptcha\ReCaptcha("6LeF-AwUAAAAAMImd6gKxDkHx-lev6OZOe2IXiMs");
+        $resp = $recaptcha->verify($gRecaptchaResponse, $remoteIp);
+        if ($resp->isSuccess()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private function getData()
@@ -61,17 +53,86 @@ class Registration extends Controller
             'email' => $email];
     }
 
-    private function recaptchaCheck()
+    public function checkUser($login)
     {
-        $remoteIp = $_SERVER['REMOTE_ADDR'];
-        $gRecaptchaResponse = $_POST['g-recaptcha-response'];
-        $recaptcha = new \ReCaptcha\ReCaptcha("6LeF-AwUAAAAAMImd6gKxDkHx-lev6OZOe2IXiMs");
-        $resp = $recaptcha->verify($gRecaptchaResponse, $remoteIp);
-        if ($resp->isSuccess()) {
-            return true;
+        $users = \Models\User::where('login', '=', $login)->get();
+        if (!empty($users->toArray())) {
+            // User exists
+            return false;
         } else {
+            return true;
+        }
+    }
+
+    private function checkFile($file, $data)
+    {
+        if ($file['error'] === UPLOAD_ERR_OK) {
+            if (preg_match('/(jpeg|jpg|png|gif)/', $file['name'])
+                && preg_match('/(jpeg|jpg|png|gif)/', $file['type'])
+            ) {
+                $id = $this->insertUser($data);
+                $this->insertFile($id, $file);
+                // Send email
+                $mailer = new Mailer();
+                $mailer->sendMail($data['email'], $data['name']);
+                header('Location:' . App::$host . 'home');
+                exit();
+            } else {
+                echo "Файл не является картинкой";
+            }
+        } else {
+            $this->insertUser($data);
+            // Send email
+            $mailer = new Mailer();
+            $mailer->sendMail($data['email'], $data['name']);
+            header('Location:' . App::$host . 'home');
+            exit();
+        }
+    }
+
+    private function insertUser($data)
+    {
+        try {
+            // Insert user
+            $user = new Models\User();
+            $user->name = $data['name'];
+            $user->age = $data['age'];
+            $user->description = $data['description'];
+            $user->login = $data['login'];
+            $user->password = $data['password'];
+            $user->email = $data['email'];
+            $user->save();
+            $id = $user->id;
+            // Return id of user
+            Session::init();
+            Session::set('loggedIn', true);
+            Session::set('id', $id);
+            return $id;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
             return false;
         }
     }
 
+    private function insertFile($id, $file)
+    {
+        try {
+            $filename = self::makeFilename($id, $file);
+            move_uploaded_file($file['tmp_name'], App::$baseDir . '/photos/' . $filename);
+            $photo = new Models\Photo();
+            $photo->filename = $filename;
+            $photo->id_user = $id;
+            $photo->save();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    private static function makeFilename($id, $file)
+    {
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $result = $id . "_avatar.$ext";
+        return $result;
+    }
 }
