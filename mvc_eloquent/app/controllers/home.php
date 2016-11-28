@@ -9,44 +9,37 @@ Class Home extends Controller
         $logged = Session::get('loggedIn');
         if ($logged == false) {
             //Session::destroy();
-            header('Location: login');
+            header('Location:' . App::$host . 'login');
             exit();
         }
-
     }
 
     public function index()
     {
         $id = Session::get('id');
-        $currentUser = $this->model('user');
-        $currentUser->getData($id);
-        $ids = $this->model('users')->getUsers();
-        foreach ($ids as $userID) {
-            $id = $userID['id'];
-            $user = $this->model('user');
-            $user->getData($id);
-            $users[] = $user;
-        }
-        usort($users, array($this, "cmp_obj"));
-        $this->view('home', ['user' => $currentUser, 'users' => $users]);
-        //$this->view('home');
+        $currentUser = \Models\User::find($id);
+        $users = \Models\User::orderBy('age', 'asc')->get();
+        $photos = $currentUser->photos();
+        foreach ($users as $user) {
+            if ($user->age < 18) {
+                $ageTypes[] = 'несовершеннолетний';
+            } else {
+                $ageTypes[] = 'совершеннолетний';
+            }
 
+        }
+        $this->view('home', [
+            'user' => $currentUser,
+            'users' => $users,
+            'ageTypes' => $ageTypes,
+            'photos' => $photos
+        ]);
     }
 
     public function logout()
     {
         Session::destroy();
-        header('Location: ../login');
+        header('Location:' . App::$host . 'login');
         exit();
-    }
-
-    private static function cmp_obj($a, $b)
-    {
-        $al = $a->age;
-        $bl = $b->age;
-        if ($al == $bl) {
-            return 0;
-        }
-        return ($al > $bl) ? +1 : -1;
     }
 }

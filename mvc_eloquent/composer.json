@@ -11,6 +11,8 @@
     "phpmailer/phpmailer": "^5.2",
     "google/recaptcha": "~1.1",
     "twig/twig": "~1.0",
-    "illuminate/database": "^5.3"
+    "illuminate/database": "^5.3",
+    "intervention/image": "^2.3",
+    "vlucas/valitron": "^1.2"
   }
 }

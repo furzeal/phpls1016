@@ -3,19 +3,17 @@
 class Controller
 {
     public $twig;
-    public $base;
     public function __construct()
     {
-        $this->base=str_replace("/core","",__DIR__);
-        $loader = new Twig_Loader_Filesystem($this->base.'/views/templates');
-        $this->twig = new Twig_Environment($loader,[
-         'cache'=>false
+        $loader = new Twig_Loader_Filesystem(App::$baseDir. '/app/views/templates');
+        $this->twig = new Twig_Environment($loader, [
+            'cache' => false
         ]);
     }
 
     public function model($model)
     {
-        require_once '../app/models/' . $model . '.php';
+        //require_once App::$baseDir.'/app/models/' . $model . '.php';
         // CHECK FILE EXISTANCE
         return new $model();
     }
@@ -23,9 +21,11 @@ class Controller
     public function view($view, $data = [])
     {
         //require_once '../app/views/' . $view . '.php';
-        $view = $view.'.twig';
-//        echo "<pre>";
-//        var_dump($view);
+        $view = $view . '.twig';
         echo $this->twig->render($view, $data);
+    }
+    protected function clear($data)
+    {
+        return htmlentities(strip_tags(trim($data)), ENT_QUOTES);
     }
 }
