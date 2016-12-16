@@ -2,8 +2,8 @@
 
 $attachment = __DIR__ . '/01.jpg';
 
-$client_id = '5758955'; // ID приложения
-$client_secret = 'MD5SSIcgd25V1c57N4Rc'; // Защищённый ключ
+$client_id = ''; // ID приложения
+$client_secret = ''; // Защищённый ключ
 $redirect_uri = 'http://php/08_vkapi/'; // Адрес сайта
 
 $url = 'http://oauth.vk.com/authorize';

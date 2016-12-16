@@ -1,0 +1,12 @@
+<?php return array (
+  'preserve_keys' => true,
+  'update_object' => false,
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => 'c483617bfb4d4d8ce3835e5edf11aaf7',
+  'package' => 'modx',
+  'class' => 'modSystemSetting',
+  'signature' => 'bdfc524dd04947ab1ba99d5c262f1026',
+  'native_key' => 'allow_manager_login_forgot_password',
+  'object' => '{"key":"allow_manager_login_forgot_password","value":true,"xtype":"combo-boolean","namespace":"core","area":"authentication","editedon":null}',
+);

@@ -1,0 +1,12 @@
+<?php return array (
+  'preserve_keys' => true,
+  'update_object' => false,
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => '5efd0968c3f995d4654181ffc1aa95cc',
+  'package' => 'modx',
+  'class' => 'modSystemSetting',
+  'signature' => '929c65b2363b0e61b64cb68d12f51a90',
+  'native_key' => 'main_nav_parent',
+  'object' => '{"key":"main_nav_parent","value":"topnav","xtype":"textfield","namespace":"core","area":"manager","editedon":null}',
+);

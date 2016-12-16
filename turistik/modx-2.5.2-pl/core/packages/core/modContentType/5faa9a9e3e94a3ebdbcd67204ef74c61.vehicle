@@ -1,0 +1,13 @@
+<?php return array (
+  'preserve_keys' => false,
+  'update_object' => false,
+  'unique_key' => 'mime_type',
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => 'b7d7a49eb98e5971e4635253b6a6827d',
+  'package' => 'modx',
+  'class' => 'modContentType',
+  'signature' => '5faa9a9e3e94a3ebdbcd67204ef74c61',
+  'native_key' => 6,
+  'object' => '{"id":6,"name":"RSS","description":"For RSS feeds","mime_type":"application\\/rss+xml","file_extensions":".rss","headers":"NULL","binary":0}',
+);

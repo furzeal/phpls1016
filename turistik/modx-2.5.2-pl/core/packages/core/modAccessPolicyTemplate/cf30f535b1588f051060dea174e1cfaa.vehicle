@@ -1,0 +1,140 @@
+<?php return array (
+  'preserve_keys' => false,
+  'unique_key' => 
+  array (
+    0 => 'name',
+  ),
+  'update_object' => true,
+  'related_objects' => 
+  array (
+    'Permissions' => 
+    array (
+      '5105a575aa093cc23a039e79e41e8271' => 
+      array (
+        'preserve_keys' => false,
+        'update_object' => true,
+        'unique_key' => 
+        array (
+          0 => 'template',
+          1 => 'name',
+        ),
+        'class' => 'modAccessPermission',
+        'object' => '{"id":null,"template":0,"name":"create","description":"perm.create_desc","value":1}',
+        'guid' => '0fbc215a74cd04a8d52560e7f655b94d',
+        'native_key' => NULL,
+        'signature' => 'a8ca87d8da595778f88155dd2e5a1e73',
+      ),
+      '56c371b1fa923c451af67e27027a0447' => 
+      array (
+        'preserve_keys' => false,
+        'update_object' => true,
+        'unique_key' => 
+        array (
+          0 => 'template',
+          1 => 'name',
+        ),
+        'class' => 'modAccessPermission',
+        'object' => '{"id":null,"template":0,"name":"copy","description":"perm.copy_desc","value":1}',
+        'guid' => 'af49dd3b20a7f07060309ba27233ac85',
+        'native_key' => NULL,
+        'signature' => '6e18548856eee89b5fe45e72cadaf840',
+      ),
+      '0f08d4eaec4834fb5970eebcc98c7d04' => 
+      array (
+        'preserve_keys' => false,
+        'update_object' => true,
+        'unique_key' => 
+        array (
+          0 => 'template',
+          1 => 'name',
+        ),
+        'class' => 'modAccessPermission',
+        'object' => '{"id":null,"template":0,"name":"list","description":"perm.list_desc","value":1}',
+        'guid' => 'dcc665349ec4dfc12665c1e267169f08',
+        'native_key' => NULL,
+        'signature' => '1853312886decb22759e92af99005045',
+      ),
+      '56e40c199b542db3d0cf78456e010f3c' => 
+      array (
+        'preserve_keys' => false,
+        'update_object' => true,
+        'unique_key' => 
+        array (
+          0 => 'template',
+          1 => 'name',
+        ),
+        'class' => 'modAccessPermission',
+        'object' => '{"id":null,"template":0,"name":"load","description":"perm.load_desc","value":1}',
+        'guid' => '5505c2c8286967bc9a8aecb3f2094e5d',
+        'native_key' => NULL,
+        'signature' => '5319d7730050943504d3c58d7e176aa7',
+      ),
+      'ab87e68583cea468f6303de49abb5cc3' => 
+      array (
+        'preserve_keys' => false,
+        'update_object' => true,
+        'unique_key' => 
+        array (
+          0 => 'template',
+          1 => 'name',
+        ),
+        'class' => 'modAccessPermission',
+        'object' => '{"id":null,"template":0,"name":"remove","description":"perm.remove_desc","value":1}',
+        'guid' => 'ddbd76b910ea4c8ec069bbc94ec8f84c',
+        'native_key' => NULL,
+        'signature' => 'e69a556d30f1ea5b6d6b08f4e08750d7',
+      ),
+      'b2bbae7c168ab4474c0ffea714060dc6' => 
+      array (
+        'preserve_keys' => false,
+        'update_object' => true,
+        'unique_key' => 
+        array (
+          0 => 'template',
+          1 => 'name',
+        ),
+        'class' => 'modAccessPermission',
+        'object' => '{"id":null,"template":0,"name":"save","description":"perm.save_desc","value":1}',
+        'guid' => 'd6f7765f9958adda14479d1a931ce8d6',
+        'native_key' => NULL,
+        'signature' => 'c07b2e540b875251d92a2891cadfdab8',
+      ),
+      '2b23f3defc91229ebb9a32c2a41610b7' => 
+      array (
+        'preserve_keys' => false,
+        'update_object' => true,
+        'unique_key' => 
+        array (
+          0 => 'template',
+          1 => 'name',
+        ),
+        'class' => 'modAccessPermission',
+        'object' => '{"id":null,"template":0,"name":"view","description":"perm.view_desc","value":1}',
+        'guid' => 'b68c9e00c399256148d248a32cb527b1',
+        'native_key' => NULL,
+        'signature' => '41f70ec99b7cecfd4fc78344cfb902fe',
+      ),
+    ),
+  ),
+  'related_object_attributes' => 
+  array (
+    'Permissions' => 
+    array (
+      'preserve_keys' => false,
+      'update_object' => true,
+      'unique_key' => 
+      array (
+        0 => 'template',
+        1 => 'name',
+      ),
+    ),
+  ),
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => '40ffc27cfd1be43ed4d22ec98e9ae155',
+  'package' => 'modx',
+  'class' => 'modAccessPolicyTemplate',
+  'signature' => 'cf30f535b1588f051060dea174e1cfaa',
+  'native_key' => NULL,
+  'object' => '{"id":null,"template_group":0,"name":"MediaSourceTemplate","description":"Media Source Policy Template with all attributes.","lexicon":"permissions"}',
+);

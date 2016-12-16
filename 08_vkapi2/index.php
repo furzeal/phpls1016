@@ -7,8 +7,8 @@ require 'post.php';
 $token = file_get_contents('token.txt');
 echo $token;
 if (empty($token)) {
-    $client_id = '5760279'; // ID приложения
-    $client_secret = 's7STPZY1YqGe2tQOVyw6'; // Защищённый ключ
+    $client_id = ''; // ID приложения
+    $client_secret = ''; // Защищённый ключ
     $redirect_uri = 'blank.html'; // Адрес сайта
 
     $url = 'http://oauth.vk.com/authorize';
